@@ -39,7 +39,7 @@ public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
     @Autowired
     ConferenceRepository repository;
 
-    //@PreDestroy
+    @PreDestroy
     public void deleteIndex() {
         elasticsearchOperations.deleteIndex(Conference.class);
     }
