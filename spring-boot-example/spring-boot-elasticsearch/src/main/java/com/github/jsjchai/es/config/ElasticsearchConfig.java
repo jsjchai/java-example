@@ -2,6 +2,7 @@ package com.github.jsjchai.es.config;
 
 import com.github.jsjchai.es.dao.ConferenceRepository;
 import com.github.jsjchai.es.domain.Conference;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,12 @@ import java.util.Arrays;
  */
 @Configuration
 @EnableElasticsearchRepositories
+@Slf4j
 public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
+
+    /**
+     *  Elasticsearch 6.8.5
+     */
     @Override
     public RestHighLevelClient elasticsearchClient() {
         return RestClients.create(ClientConfiguration.localhost()).rest();
@@ -33,16 +39,19 @@ public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
     @Autowired
     ConferenceRepository repository;
 
-    @PreDestroy
+    //@PreDestroy
     public void deleteIndex() {
         elasticsearchOperations.deleteIndex(Conference.class);
     }
 
     @PostConstruct
     public void insertDataSample() {
-
-        repository.deleteAll();
-        elasticsearchOperations.refresh(Conference.class);
+        long count = repository.count();
+        log.info("conference-index count:{}",count);
+        if (count > 0) {
+            repository.deleteAll();
+            elasticsearchOperations.refresh(Conference.class);
+        }
 
         // Save data sample
         repository.save(Conference.builder().date("2014-11-06").name("Spring eXchange 2014 - London")

@@ -20,16 +20,16 @@ import static org.hamcrest.Matchers.hasSize;
 @SpringBootTest(classes = ElasticsearchApplication.class)
 class ElasticsearchOperationsTest {
 
-
-
     @Autowired
-    ElasticsearchOperations operations;
+    private ElasticsearchOperations operations;
 
     @Test
     void textSearch() throws ParseException {
 
         String expectedDate = "2014-10-29";
         String expectedWord = "java";
+
+        // keywords包含keywords且日期大于expectedDate
         CriteriaQuery query = new CriteriaQuery(
                 new Criteria("keywords").contains(expectedWord).and(new Criteria("date").greaterThanEqual(expectedDate)));
 
