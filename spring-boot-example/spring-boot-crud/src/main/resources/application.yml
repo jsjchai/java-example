@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: DEBUG
+
+## Mybatis config
+mybatis-plus:
+  # 所有Entity别名类所在包
+  type-aliases-package: com.github.jsjchai.crud.domain
+  mapper-locations: classpath:mybatis-plus/mapper/*.xml
+
+spring:
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    hikari:
+      maximum-pool-size: 10
+    schema: classpath:db/create.sql
+    data:  classpath:db/insert.sql
+
