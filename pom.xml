@@ -9,6 +9,7 @@
         <module>joda-time-example</module>
         <module>http-example</module>
         <module>spring-boot-example</module>
+        <module>function-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
