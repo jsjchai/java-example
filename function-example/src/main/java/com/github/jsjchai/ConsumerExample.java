@@ -2,6 +2,7 @@ package com.github.jsjchai;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.function.Consumer;
 
@@ -10,6 +11,7 @@ import java.util.function.Consumer;
  */
 @Getter
 @Setter
+@ToString
 public class ConsumerExample {
 
     private String str;
