@@ -2,24 +2,29 @@ package com.github.jsjchai.resilience4j.service.impl;
 
 import com.github.jsjchai.resilience4j.exception.DBException;
 import com.github.jsjchai.resilience4j.service.OrderService;
-import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 /**
  * @author chaicj
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
+    /**
+     *  服务熔断，当抛出DBException，回调fallback方法
+     * @return String
+     */
     @Override
-    @CircuitBreaker(name = "orderCircuitBreaker")
-    @Bulkhead(name = "orderCircuitBreaker")
-    @Retry(name = "orderCircuitBreaker")
+    @CircuitBreaker(name = "order",fallbackMethod = "fallback")
     public String saveOrder() {
-        throw new DBException();
+        throw new DBException("db exception");
+    }
+
+    private String fallback(Exception e){
+        log.info("fallback exception",e);
+        return "00000000000";
     }
 }
