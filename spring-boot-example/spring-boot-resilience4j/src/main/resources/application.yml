@@ -4,15 +4,18 @@ server:
 logging:
   level:
     root: INFO
+    io.github.resilience4j: DEBUG
 
 # https://resilience4j.readme.io/docs/getting-started-3
+
+# 服务熔断
 resilience4j.circuitbreaker:
   configs:
     default:
       ringBufferSizeInClosedState: 5 # 熔断器关闭时的缓冲区大小
       ringBufferSizeInHalfOpenState: 2 # 熔断器半开时的缓冲区大小
       waitDurationInOpenState: 10000 # 熔断器从打开到半开需要的时间
-      failureRateThreshold: 60 # 熔断器打开的失败阈值
+      failureRateThreshold: 60 # 以百分比配置故障率阈值
       eventConsumerBufferSize: 10 # 事件缓冲区大小
       registerHealthIndicator: true # 健康监测
       slidingWindowSize: 10
@@ -29,6 +32,16 @@ resilience4j.circuitbreaker:
   instances:
     order:
       baseConfig: default
+
+# 并发控制
+resilience4j.bulkhead:
+  configs:
+    default:
+      maxConcurrentCalls: 2
+  instances:
+    order:
+      maxConcurrentCalls: 2
+      maxWaitDuration: 1000ms
 
 
 

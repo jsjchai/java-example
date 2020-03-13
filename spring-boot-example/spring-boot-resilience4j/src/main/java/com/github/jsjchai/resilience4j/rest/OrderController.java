@@ -22,4 +22,14 @@ public class OrderController {
     public  String  saveOrder(){
         return orderService.saveOrder();
     }
+
+    @GetMapping("/getOrder")
+    public String getOrder(){
+        return orderService.getOrder();
+    }
+
+    @GetMapping("/bulkhead")
+    public String bulkhead(){
+        return orderService.bulkhead();
+    }
 }
