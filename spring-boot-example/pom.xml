@@ -14,6 +14,7 @@
     <modules>
         <module>spring-boot-crud</module>
         <module>spring-boot-elasticsearch</module>
+        <module>spring-boot-resilience4j</module>
     </modules>
 
 </project>
