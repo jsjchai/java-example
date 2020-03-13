@@ -5,10 +5,12 @@ import com.github.jsjchai.resilience4j.exception.DBException;
 import com.github.jsjchai.resilience4j.service.OrderService;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author chaicj
@@ -44,6 +46,23 @@ public class OrderServiceImpl implements OrderService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return "success";
+    }
+
+
+    private static Integer num = 1;
+
+    @Override
+    @Retry(name = CIRCUIT_NAME)
+    public String retry() throws TimeoutException {
+        log.info("retry start");
+        if(num == 1){
+            num = 0;
+            throw new TimeoutException();
+        }else{
+            num = 1;
+        }
+        log.info("retry end");
         return "success";
     }
 

@@ -43,6 +43,20 @@ resilience4j.bulkhead:
       maxConcurrentCalls: 2
       maxWaitDuration: 1000ms
 
+# 重试策略
+resilience4j.retry:
+  configs:
+    default:
+      maxRetryAttempts: 3
+      waitDuration: 100
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+      ignoreExceptions:
+        - com.github.jsjchai.resilience4j.exception.DBException
+  instances:
+    order:
+      baseConfig: default
+
 
 
 

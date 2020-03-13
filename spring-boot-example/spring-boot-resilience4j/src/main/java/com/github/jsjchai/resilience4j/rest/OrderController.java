@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeoutException;
+
 /**
  * @author chaicj
  */
@@ -31,5 +33,10 @@ public class OrderController {
     @GetMapping("/bulkhead")
     public String bulkhead(){
         return orderService.bulkhead();
+    }
+
+    @GetMapping("/retry")
+    public String retry() throws TimeoutException {
+        return orderService.retry();
     }
 }
