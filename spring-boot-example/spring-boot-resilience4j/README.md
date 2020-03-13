@@ -32,3 +32,7 @@ springboot
 > 缓存异常处理
 
 ## demo
+
+## 参考文档
+https://resilience4j.readme.io/docs
+
