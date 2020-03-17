@@ -6,6 +6,19 @@ logging:
     root: INFO
     io.github.resilience4j: DEBUG
 
+spring:
+  application:
+    name: spring-boot-resilience4j-example
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 # https://resilience4j.readme.io/docs/getting-started-3
 
 # 服务熔断
@@ -37,10 +50,10 @@ resilience4j.circuitbreaker:
 resilience4j.bulkhead:
   configs:
     default:
-      maxConcurrentCalls: 2
+      maxConcurrentCalls: 200
   instances:
     order:
-      maxConcurrentCalls: 2
+      maxConcurrentCalls: 10
       maxWaitDuration: 1000ms
 
 # 重试策略
