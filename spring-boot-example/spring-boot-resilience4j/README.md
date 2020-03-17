@@ -60,8 +60,10 @@ management:
 ```shell
 docker run  -d -p 9090:9090 -v "d:/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"  prom/prometheus
 ```
+[prometheus.yml](https://github.com/jsjchai/java-example/blob/master/spring-boot-example/spring-boot-resilience4j/src/main/resources/prometheus.yml)
 
 4. 安装grafana
+
 [grafana_dashboard.json](https://resilience4j.readme.io/docs/grafana-1)
 
 
