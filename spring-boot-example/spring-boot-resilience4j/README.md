@@ -57,6 +57,7 @@ management:
 * 访问 http://127.0.0.1:9180/actuator/prometheus
 
 3. 安装prometheus
+[Run Docker image](https://grafana.com/docs/grafana/latest/installation/docker/)
 ```shell
 docker run  -d -p 9090:9090 -v "d:/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"  prom/prometheus
 ```
