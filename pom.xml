@@ -10,6 +10,7 @@
         <module>http-example</module>
         <module>spring-boot-example</module>
         <module>function-example</module>
+        <module>netty-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -140,6 +141,11 @@
                         <artifactId>junit-vintage-engine</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>4.1.48.Final</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
