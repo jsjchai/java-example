@@ -1,7 +1,7 @@
 package com.github.jsjchai.resilience4j.exception;
 
 /**
- * @author chaicj
+ * @author jsjchai
  */
 public class DBException extends RuntimeException{
 
